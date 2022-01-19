@@ -28,6 +28,10 @@ var startQuiz = document.querySelector(".start-quiz");
     // Sets the seconds in the game for setTime function
     var secondsLeft = 5;
 
+    // Other variables
+    var userScore = []
+
+
 // Assign variables to array for quiz questions
 var quizQuestions = [
     {question: "What is the correct way to console log something?",
@@ -45,7 +49,7 @@ var quizQuestions = [
     },
     correctAnswer: "a"
     },
-    {question: "Javascript is a ___-side programming language",
+    {question: "Javascript is a ___-side programming language.",
     answers: {
         a: "Client",
         b: "Server",
@@ -62,7 +66,16 @@ function begin(){
     // Call function to begin timer
     setTime();
     console.log(quizQuestions)
+    // For loop to iterate through questions and answers
 
+
+    // If: answer matches correct answer, display correct and go to next question <- !!! event listeners? !!!
+
+
+    // Else if: timer deducts ten seconds
+
+    
+    // Else if: all questions are done, push seconds left to user score
 }
 
 // Timer function
@@ -75,6 +88,7 @@ function setTime() {
       if(secondsLeft === 0) {
         // Stops execution of action at set interval
         clearInterval(timerInterval);
+        // End game !!!
       }
   
     }, 1000);
