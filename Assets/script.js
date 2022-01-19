@@ -38,12 +38,21 @@ var quizQuestions = [
     },
     correctAnswer: "b"
     },
-    {question: "If you type the following code in the console window, what result will you get? \n3 > 2 > 1 === false;",
+    {question: "If you type the following code in the console window, what result will you get? 3 > 2 > 1 === false;",
     answers: {
-        a: "true",
-        b: "false",
+        a: "True",
+        b: "False",
     },
     correctAnswer: "a"
+    },
+    {question: "Javascript is a ___-side programming language",
+    answers: {
+        a: "Client",
+        b: "Server",
+        c: "Both",
+        d: "None"
+    },
+    correctAnswer: "c"
     },
 ]
 
