@@ -1,0 +1,19 @@
+* {
+    font-family: 'Montserrat', sans-serif;
+}
+
+h1 {
+    text-align: center;
+}
+
+.highscores {
+    text-align: left;
+}
+
+.timer {
+    text-align: right;
+}
+
+main {
+    text-align: center;
+}
