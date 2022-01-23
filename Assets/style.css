@@ -18,6 +18,7 @@ main {
     text-align: center;
 }
 
-.hidden-correct {
+#form {
     visibility: hidden;
 }
+

@@ -19,13 +19,16 @@
       href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap"
       rel="stylesheet"
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap" rel="stylesheet">
   </head>
   <body>
     <header>
       <nav>
-        <div class="highscores">
+        <!-- <div class="highscores">
           <a href="#">Highscores</a>
-        </div>
+        </div> -->
         <div class="timer"></div>
       </nav>
       <h1>The FUNdamentals of Javascript Quiz!</h1>
@@ -35,11 +38,19 @@
         <h2 id="questions"></h2>
         <p id="possible-answers"></p>
       </div>
-      <div class="scoreboard"></div>
-      <button class="start-quiz">Begin Quiz</button>
-      <!-- Create submit button for high scores
-        Create clear scores button
+      <h3 id="display-score"></h3>
+      <div id=user-final-score></div>
+      <table>
+
+      </table>
+      <form action="#" id="form">
+        <label for="initials">Initials:</label>
+        <input type="text" id="initials" name="initials"><br><br>
+        <input type="submit" value="Submit" id="submit">
+      </form>
+      <!-- Create clear scores button
         Create go back button for end of game -->
+        <button class="start-quiz">Begin Quiz</button>
     </main>
     <script src="./Assets/script.js" defer></script>
   </body>

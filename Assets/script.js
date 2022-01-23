@@ -10,7 +10,6 @@ var startQuiz = document.querySelector(".start-quiz");
 var quizQuestions = document.querySelector("#questions");
 var quizAnswers = document.querySelector("#possible-answers");
 var hiddenCorrect = document.querySelector("#hidden-correct");
-var displayScore = document.querySelector(".display-score");
 
 //Assign other variables
 
@@ -30,6 +29,8 @@ var userScore = 0;
 var questionOnQuiz = "";
 var questionIndex = 0;
 var currentQuestion = null;
+var userFinalScore="";
+var userInitials = [];
 
 // Assign variables to array for quiz questions
 var questions = [
@@ -161,6 +162,7 @@ function selectAnswer(event) {
     secondsLeft = secondsLeft - 10;
   }
 
+  // Calls next question function
   if (questionIndex < questions.length && secondsLeft > 0) {
     nextQuestion();
   }
@@ -176,16 +178,34 @@ function selectAnswer(event) {
 }
 
 function showResults() {
+  // Hides questions and answers
   quizQuestions.style.display = "none";
   quizAnswers.style.display = "none";
+
+  // Calculates score
   userScore = userScore + secondsLeft;
-  console.log(userScore);
-  //
-  //
-  //
-  //
-  //
+
+  // Adds score to the body of the html and unhides initial form
+  userFinalScore.innerHTML="";
+  userFinalScore = ("Your score: " + userScore);
+  document.getElementById("display-score").textContent = userFinalScore;
+  document.getElementById("form").style.visibility = "visible";
+
+  // Event listener for submit button in form - calls submit score function
+  var userSubmitScore = document.getElementById("submit");
+  userSubmitScore.addEventListener("click", submitScore);
 }
+
+// Submit score function
+function submitScore () {
+  console.log("hello")
+  // Sets initials to local storage w/ JSON stringify to take score from an array to a string
+
+  // Get items from local storage - push to empty array
+  // var userInitials = [];
+
+}
+
 
 // Timer function
 function setTime() {
@@ -204,13 +224,9 @@ function setTime() {
     }
   }, 1000);
 }
-
-// Call functions
-
+ // TO DO:
 // Get item/set item to store info to local storage
-
 // Get items from local storage - push to empty array
-
 // Display empty array in to high scores
 
 // Create event listeners for start-quiz button
