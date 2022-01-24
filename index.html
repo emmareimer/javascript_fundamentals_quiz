@@ -19,9 +19,12 @@
       href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap"
       rel="stylesheet"
     />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <header>
@@ -39,18 +42,27 @@
         <p id="possible-answers"></p>
       </div>
       <h3 id="display-score"></h3>
-      <div id=user-final-score></div>
-      <table>
-
-      </table>
-      <form action="#" id="form">
+      <div id="user-final-score"></div>
+      <div class="highscore-table">
+        <table id="table">
+          <tr>
+            <th class="hidden1">Initials</th>
+            <th class="hidden2">High Score</th>
+          </tr>
+          <tr>
+            <th id="new-intials"></th>
+            <th id="new-score"></th>
+          </tr>
+        </table>
+      </div>
+      <form action="#" id="form" method="get">
         <label for="initials">Initials:</label>
-        <input type="text" id="initials" name="initials"><br><br>
-        <input type="submit" value="Submit" id="submit">
+        <input type="text" id="initials" name="initials" /><br /><br />
+        <input type="submit" value="Submit" id="submit" />
       </form>
       <!-- Create clear scores button
         Create go back button for end of game -->
-        <button class="start-quiz">Begin Quiz</button>
+      <button class="start-quiz">Begin Quiz</button>
     </main>
     <script src="./Assets/script.js" defer></script>
   </body>

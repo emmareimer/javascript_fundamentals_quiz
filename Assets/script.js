@@ -29,8 +29,7 @@ var userScore = 0;
 var questionOnQuiz = "";
 var questionIndex = 0;
 var currentQuestion = null;
-var userFinalScore="";
-var userInitials = [];
+var userFinalScore = "";
 
 // Assign variables to array for quiz questions
 var questions = [
@@ -186,8 +185,9 @@ function showResults() {
   userScore = userScore + secondsLeft;
 
   // Adds score to the body of the html and unhides initial form
-  userFinalScore.innerHTML="";
-  userFinalScore = ("Your score: " + userScore);
+  userFinalScore.innerHTML = "";
+  userFinalScore = "Your score: " + userScore;
+
   document.getElementById("display-score").textContent = userFinalScore;
   document.getElementById("form").style.visibility = "visible";
 
@@ -197,13 +197,30 @@ function showResults() {
 }
 
 // Submit score function
-function submitScore () {
-  console.log("hello")
-  // Sets initials to local storage w/ JSON stringify to take score from an array to a string
+function submitScore(event) {
+  event.preventDefault();
+  // Set score to local storage
+  localStorage.setItem("score", JSON.stringify(userScore));
+  // Set initials to local storage
+  var userInitialsInput = document.getElementById("initials").value;
+  var userInitials = []
+  userInitials.push(userInitialsInput)
+  localStorage.setItem("initials", JSON.stringify(userInitials));
 
-  // Get items from local storage - push to empty array
-  // var userInitials = [];
+  renderMessage();
 
+  function renderMessage(){
+    // Make high score form visible
+    document.getElementById("highscore-table").style.visibility = "visible";
+    
+    var lastHighscore = JSON.parse(localStorage.getItem("initials"))
+
+    if (lastHighscore !== null){
+      document.querySelector("#new-initials").textContent = lastHighscore.value
+    }
+
+    // NOT DONE HERE
+  }
 }
 
 
@@ -224,7 +241,7 @@ function setTime() {
     }
   }, 1000);
 }
- // TO DO:
+// TO DO:
 // Get item/set item to store info to local storage
 // Get items from local storage - push to empty array
 // Display empty array in to high scores

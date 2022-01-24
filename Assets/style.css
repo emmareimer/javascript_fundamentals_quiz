@@ -22,3 +22,8 @@ main {
     visibility: hidden;
 }
 
+#highscore-table {
+    visibility: hidden;
+}
+
+
