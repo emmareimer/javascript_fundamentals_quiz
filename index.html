@@ -29,9 +29,7 @@
   <body>
     <header>
       <nav>
-        <!-- <div class="highscores">
-          <a href="#">Highscores</a>
-        </div> -->
+        <div class="curent-score"></div>
         <div class="timer"></div>
       </nav>
       <h1>The FUNdamentals of Javascript Quiz!</h1>
@@ -49,19 +47,15 @@
             <th class="hidden1">Initials</th>
             <th class="hidden2">High Score</th>
           </tr>
-          <tr>
-            <th id="new-intials"></th>
-            <th id="new-score"></th>
-          </tr>
         </table>
-      </div>
+      </div> <br><br>
       <form action="#" id="form" method="get">
         <label for="initials">Initials:</label>
         <input type="text" id="initials" name="initials" /><br /><br />
         <input type="submit" value="Submit" id="submit" />
       </form>
-      <!-- Create clear scores button
-        Create go back button for end of game -->
+      <button id="clear">Clear Highscores</button>
+      <button id="go-back">Go Back</button> <br>
       <button class="start-quiz">Begin Quiz</button>
     </main>
     <script src="./Assets/script.js" defer></script>

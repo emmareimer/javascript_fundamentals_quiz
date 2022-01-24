@@ -1,17 +1,12 @@
-// AS A coding boot camp student
-// I WANT to take a timed quiz on JavaScript fundamentals that stores high scores
-// SO THAT I can gauge my progress compared to my peers
-
-// WHEN the game is over
-// THEN I can save my initials and my score
-
 // Assign query selector variables
 var startQuiz = document.querySelector(".start-quiz");
 var quizQuestions = document.querySelector("#questions");
 var quizAnswers = document.querySelector("#possible-answers");
 var hiddenCorrect = document.querySelector("#hidden-correct");
-
-//Assign other variables
+var goBack = document.getElementById("go-back");
+var clearButton = document.getElementById("clear");
+var newInitials = document.querySelector(".new-intials");
+var newScore = document.querySelector(".new-score");
 
 // Emptry array for high scores to be pushed in to from local storage
 var storedHighScores = [];
@@ -30,6 +25,17 @@ var questionOnQuiz = "";
 var questionIndex = 0;
 var currentQuestion = null;
 var userFinalScore = "";
+var userInitials = JSON.parse(localStorage.getItem("initials"));
+
+if (userInitials === null) {
+  userInitials = [];
+}
+
+var userScoreArr = JSON.parse(localStorage.getItem("score"));
+
+if (userScoreArr === null){
+  userScoreArr = [];
+}
 
 // Assign variables to array for quiz questions
 var questions = [
@@ -115,6 +121,7 @@ var questions = [
 function begin() {
   // Call function to begin timer
   setTime();
+
   // Hide start button upon clicking begin quiz
   startQuiz.style.display = "none";
   nextQuestion();
@@ -152,7 +159,7 @@ function selectAnswer(event) {
     alert("Correct! +10 points");
     userScore = userScore + 10;
   }
-
+  
   // Else if: timer deducts ten seconds
   else if (
     userAnswer.textContent !=
@@ -174,6 +181,7 @@ function selectAnswer(event) {
   ) {
     showResults();
   }
+
 }
 
 function showResults() {
@@ -183,6 +191,10 @@ function showResults() {
 
   // Calculates score
   userScore = userScore + secondsLeft;
+
+  if (userScore < 0){
+    userScore = 0
+  }
 
   // Adds score to the body of the html and unhides initial form
   userFinalScore.innerHTML = "";
@@ -199,30 +211,60 @@ function showResults() {
 // Submit score function
 function submitScore(event) {
   event.preventDefault();
-  // Set score to local storage
-  localStorage.setItem("score", JSON.stringify(userScore));
-  // Set initials to local storage
-  var userInitialsInput = document.getElementById("initials").value;
-  var userInitials = []
-  userInitials.push(userInitialsInput)
+
+  document.getElementById("form").style.visibility = "hidden";
+
+  var userSubmitScore = document.getElementById("submit");
+  userSubmitScore.style.visibility = "hidden";
+
+
+  // Set score and initials to local storage, option 1
+  userScoreArr.push(userScore)
+  localStorage.setItem("score", JSON.stringify(userScoreArr));
+
+  // Set initials to local storage, option 1
+  var userInitialsInput = document.getElementById("initials");
+  userInitials.push(userInitialsInput.value);
+
   localStorage.setItem("initials", JSON.stringify(userInitials));
+
+  // Clears the initial input value
+  userInitialsInput.value = ""
+  
+  // Event listener for clear button
+  clearButton.addEventListener("click", function () {
+    localStorage.clear();
+    document.querySelectorAll('.table-row').forEach(e => e.remove());
+  });
 
   renderMessage();
 
-  function renderMessage(){
-    // Make high score form visible
-    document.getElementById("highscore-table").style.visibility = "visible";
-    
-    var lastHighscore = JSON.parse(localStorage.getItem("initials"))
+function renderMessage() {
+  // High score table visible
+  var visibleTable = document.getElementById("table");
+  visibleTable.style.visibility = "visible";
+  // Clear button visible
+  var clearForm = document.getElementById("clear");
+  clearForm.style.visibility = "visible";
+  // Go back button visible
+  goBack.style.visibility = "visible";
 
-    if (lastHighscore !== null){
-      document.querySelector("#new-initials").textContent = lastHighscore.value
-    }
+  // Create a for loop that creates and append a table row for each high score
+  for (let i = 0; i < userInitials.length; i++) {
+    var newTableRow = document.createElement("tr")
+    newTableRow.classList.add("table-row")
+    var tableDataOne = document.createElement("td")
+    var tableDataTwo = document.createElement("td")
 
-    // NOT DONE HERE
+    tableDataOne.innerHTML = userInitials[i];
+    tableDataTwo.innerHTML = userScoreArr[i];
+
+    newTableRow.append(tableDataOne, tableDataTwo)
+
+    visibleTable.appendChild(newTableRow)
   }
 }
-
+}
 
 // Timer function
 function setTime() {
@@ -232,19 +274,24 @@ function setTime() {
     timeEl.textContent = secondsLeft + " seconds left.";
 
     if (
-      secondsLeft === 0 ||
-      secondsLeft < 0 ||
+      secondsLeft <= 0 ||
       questionIndex == questions.length
     ) {
       // Stops execution of action at set interval
       clearInterval(timerInterval);
     }
+
+    if (secondsLeft < 0){
+      secondsLeft = 0
+      timeEl.textContent = secondsLeft
+    }
   }, 1000);
 }
-// TO DO:
-// Get item/set item to store info to local storage
-// Get items from local storage - push to empty array
-// Display empty array in to high scores
 
 // Create event listeners for start-quiz button
 startQuiz.addEventListener("click", begin);
+
+// Event listener for go back button
+goBack.addEventListener("click", function () {
+  location.reload();
+});

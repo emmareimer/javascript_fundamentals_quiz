@@ -22,8 +22,21 @@ main {
     visibility: hidden;
 }
 
-#highscore-table {
+#table {
+    visibility: hidden;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+table, th {
+    border: 1px solid black;
+  }
+
+#clear {
     visibility: hidden;
 }
 
+#go-back {
+    visibility: hidden;
+}
 
