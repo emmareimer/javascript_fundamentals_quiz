@@ -9,6 +9,7 @@ h1 {
     font-size: 75px;
     color: #F08080;
     margin-top: 50px;
+    line-height: .8em;
 }
 
 #fun {
@@ -79,7 +80,6 @@ button {
 }
 
 #yes-correct {
-    visibility: hidden;
     font-family: 'Lobster', cursive;
     font-size: 50px;
 }
@@ -89,5 +89,23 @@ button {
     font-family: 'Lobster', cursive;
     font-size: 50px;
 }
+
+/* @media (max-width: 480px) { 
+    h1 {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 30px;
+        display: block;
+    }
+
+    #fun {
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    #yes-correct {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 25px;
+    }
+
+} */
 
 

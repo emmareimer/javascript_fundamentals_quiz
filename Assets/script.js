@@ -2,38 +2,33 @@
 var startQuiz = document.querySelector(".start-quiz");
 var quizQuestions = document.querySelector("#questions");
 var quizAnswers = document.querySelector("#possible-answers");
-var hiddenCorrect = document.querySelector("#hidden-correct");
 var goBack = document.getElementById("go-back");
 var clearButton = document.getElementById("clear");
-var newInitials = document.querySelector(".new-intials");
-var newScore = document.querySelector(".new-score");
-
-// Emptry array for high scores to be pushed in to from local storage
-var storedHighScores = [];
+var yesOrNo = document.getElementById("yes-correct");
 
 // Connects timeEl with timer in html
 var timeEl = document.querySelector(".timer");
 
 // Sets the seconds in the game for setTime function
-var secondsLeft = 50;
+var secondsLeft = 60;
 
 // Other variables
 var possibleAnswers = [];
 var userAnswer = [];
 var userScore = 0;
-var questionOnQuiz = "";
 var questionIndex = 0;
 var currentQuestion = null;
 var userFinalScore = "";
 var userInitials = JSON.parse(localStorage.getItem("initials"));
 
+// If nothing in user storage, use info in array
 if (userInitials === null) {
   userInitials = [];
 }
 
 var userScoreArr = JSON.parse(localStorage.getItem("score"));
 
-if (userScoreArr === null){
+if (userScoreArr === null) {
   userScoreArr = [];
 }
 
@@ -50,8 +45,50 @@ var questions = [
   },
 
   {
+    question: "Inside which HTML element do we put the JavaScript?",
+    answers: {
+      a: "<scripting>",
+      b: "<js>",
+      c: "<javascript>",
+      d: "<script>",
+    },
+    correctAnswer: "d",
+  },
+
+  {
+    question: "Where is the correct place to insert a JavaScript?",
+    answers: {
+      a: "<head>",
+      b: "<body>",
+      c: "It doesn't matter; <head> or <body>",
+      d: "None of the above",
+    },
+    correctAnswer: "b",
+  },
+
+  {
+    question: "What is the correct syntax for referring to an external script called 'xxx.js'?",
+    answers: {
+      a: "<script name='xxx.js'>",
+      b: "<script href='xxx.js'>",
+      c: "<script src='xxx.js'>",
+    },
+    correctAnswer: "c",
+  },
+
+  {
+    question: "How do you create a function in JavaScript?",
+    answers: {
+      a: "function:myFunction()",
+      b: "function=myFunction()",
+      c: "function myFunction ()",
+    },
+    correctAnswer: "c",
+  },
+
+  {
     question:
-      "If you type the following code in the console window, what result will you get? \n3 > 2 > 1 === false;",
+      "If you type the following code in the console window, what result will you get? 3 > 2 > 1 === false;",
     answers: {
       a: "True",
       b: "False",
@@ -115,6 +152,17 @@ var questions = [
     },
     correctAnswer: "a",
   },
+
+  {
+    question: "What is the correct way to write a JavaScript array?",
+    answers: {
+      a: "var colors = (1:'red', 2:'green', 3:'blue'",
+      b: "var colors = ['red', 'green', 'blue'",
+      c: "var colors = 1(red) 2(green) 3(blue)",
+      d: "var colors = 'red', 'green', 'blue'",
+    },
+    correctAnswer: "b",
+  },
 ];
 
 // Create function to begin quiz
@@ -129,7 +177,6 @@ function begin() {
 
 // For loop to iterate through questions and answers
 function nextQuestion() {
-
   currentQuestion = questions[questionIndex];
   quizQuestions.textContent = currentQuestion.question;
 
@@ -149,11 +196,9 @@ function nextQuestion() {
   questionIndex++;
 }
 
+// Function to see if user selects the correct answer
 function selectAnswer(event) {
   userAnswer = event.target;
-    // Hides the correct or wrong p tag
-  document.getElementById("yes-correct").style.visibility = "hidden"
-  document.getElementById("no-wrong").style.visibility = "hidden"
 
   // If: answer matches correct answer, display "correct" and go to next question
   if (
@@ -161,18 +206,18 @@ function selectAnswer(event) {
     currentQuestion.answers[currentQuestion.correctAnswer]
   ) {
     // Display yas correct
-    document.getElementById("yes-correct").style.visibility = "visible"
+    yesOrNo.innerHTML = "Yasss! +10 points for you, Glen Coco!";
     // Add 10 points to score
     userScore = userScore + 10;
   }
-  
+
   // Else if: timer deducts ten seconds
   else if (
     userAnswer.textContent !=
     currentQuestion.answers[currentQuestion.correctAnswer]
   ) {
     // Display wrong
-    document.getElementById("no-wrong").style.visibility = "visible"
+    yesOrNo.innerHTML = "Wrong! -10 seconds!";
     // Deduct 10 seconds
     secondsLeft = secondsLeft - 10;
   }
@@ -182,15 +227,14 @@ function selectAnswer(event) {
     nextQuestion();
   }
 
-  // Else render results
-  else if (
-    questionIndex == questions.length ||
-    secondsLeft == 0 ||
-    secondsLeft < 0
-  ) {
+  else if (secondsLeft <= 0) {
     showResults();
   }
 
+  // Else render results
+  else if (questionIndex == questions.length || secondsLeft === 0) {
+    showResults();
+  }
 }
 
 function showResults() {
@@ -198,15 +242,11 @@ function showResults() {
   quizQuestions.style.display = "none";
   quizAnswers.style.display = "none";
 
-  document.getElementById("yes-correct").style.display = "none"
-  document.getElementById("no-wrong").style.display = "none"
-  
-
   // Calculates score
   userScore = userScore + secondsLeft;
 
-  if (userScore < 0){
-    userScore = 0
+  if (userScore < 0) {
+    userScore = 0;
   }
 
   // Adds score to the body of the html and unhides initial form
@@ -226,13 +266,13 @@ function submitScore(event) {
   event.preventDefault();
 
   document.getElementById("form").style.visibility = "hidden";
+  yesOrNo.innerHTML = "";
 
   var userSubmitScore = document.getElementById("submit");
   userSubmitScore.style.visibility = "hidden";
 
-
   // Set score and initials to local storage, option 1
-  userScoreArr.push(userScore)
+  userScoreArr.push(userScore);
   localStorage.setItem("score", JSON.stringify(userScoreArr));
 
   // Set initials to local storage, option 1
@@ -242,41 +282,42 @@ function submitScore(event) {
   localStorage.setItem("initials", JSON.stringify(userInitials));
 
   // Clears the initial input value
-  userInitialsInput.value = ""
-  
+  userInitialsInput.value = "";
+
   // Event listener for clear button
   clearButton.addEventListener("click", function () {
     localStorage.clear();
-    document.querySelectorAll('.table-row').forEach(e => e.remove());
+    document.querySelectorAll(".table-row").forEach((e) => e.remove());
   });
 
   renderMessage();
 
-function renderMessage() {
-  // High score table visible
-  var visibleTable = document.getElementById("table");
-  visibleTable.style.visibility = "visible";
-  // Clear button visible
-  var clearForm = document.getElementById("clear");
-  clearForm.style.visibility = "visible";
-  // Go back button visible
-  goBack.style.visibility = "visible";
+  // Send scores to the table
+  function renderMessage() {
+    // High score table visible
+    var visibleTable = document.getElementById("table");
+    visibleTable.style.visibility = "visible";
+    // Clear button visible
+    var clearForm = document.getElementById("clear");
+    clearForm.style.visibility = "visible";
+    // Go back button visible
+    goBack.style.visibility = "visible";
 
-  // Create a for loop that creates and append a table row for each high score
-  for (let i = 0; i < userInitials.length; i++) {
-    var newTableRow = document.createElement("tr")
-    newTableRow.classList.add("table-row")
-    var tableDataOne = document.createElement("td")
-    var tableDataTwo = document.createElement("td")
+    // Create a for loop that creates and append a table row for each high score
+    for (let i = 0; i < userInitials.length; i++) {
+      var newTableRow = document.createElement("tr");
+      newTableRow.classList.add("table-row");
+      var tableDataOne = document.createElement("td");
+      var tableDataTwo = document.createElement("td");
 
-    tableDataOne.innerHTML = userInitials[i];
-    tableDataTwo.innerHTML = userScoreArr[i];
+      tableDataOne.innerHTML = userInitials[i];
+      tableDataTwo.innerHTML = userScoreArr[i];
 
-    newTableRow.append(tableDataOne, tableDataTwo)
+      newTableRow.append(tableDataOne, tableDataTwo);
 
-    visibleTable.appendChild(newTableRow)
+      visibleTable.appendChild(newTableRow);
+    }
   }
-}
 }
 
 // Timer function
@@ -286,17 +327,15 @@ function setTime() {
     secondsLeft--;
     timeEl.textContent = secondsLeft + " seconds left.";
 
-    if (
-      secondsLeft <= 0 ||
-      questionIndex == questions.length
-    ) {
+    if (secondsLeft <= 0 || questionIndex == questions.length) {
       // Stops execution of action at set interval
       clearInterval(timerInterval);
     }
 
-    if (secondsLeft < 0){
-      secondsLeft = 0
-      timeEl.textContent = secondsLeft
+    // Sets seconds left equal to zero if timer goes below zero
+    if (secondsLeft < 0) {
+      secondsLeft = 0;
+      timeEl.textContent = secondsLeft;
     }
   }, 1000);
 }
@@ -308,3 +347,8 @@ startQuiz.addEventListener("click", begin);
 goBack.addEventListener("click", function () {
   location.reload();
 });
+
+// TO DO LIST !!!
+// 1. Make sure that when timer <= 0, call render message function
+// 2. Sort the highscores highest to lowest
+// 3. Media query
