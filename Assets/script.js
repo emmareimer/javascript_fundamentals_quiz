@@ -81,9 +81,9 @@ var questions = [
     answers: {
       a: "function:myFunction()",
       b: "function=myFunction()",
-      c: "function myFunction ()",
+      c: "function myFunction()",
     },
-    correctAnswer: "b",
+    correctAnswer: "c",
   },
 
   {
