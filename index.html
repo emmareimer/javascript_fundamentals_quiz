@@ -25,6 +25,9 @@
       href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap"
       rel="stylesheet"
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
   </head>
   <body>
     <header>
@@ -32,20 +35,29 @@
         <div class="curent-score"></div>
         <div class="timer"></div>
       </nav>
-      <h1>The FUNdamentals of Javascript Quiz!</h1>
+      <h1>The <span id="fun">FUN</span>damentals of Javascript <br> Quiz!</h1>
     </header>
     <main>
+      <button class="start-quiz">Begin Quiz</button>
+      <p id="instructions">You will have 50 seconds to take the quiz. <br>
+        For every wrong answer, 10 seconds will be deducted from your time. <br>
+        Any seconds remaining will be added to your final score. <br>
+        Good luck!</p>
       <div class="empty-container">
         <h2 id="questions"></h2>
         <p id="possible-answers"></p>
+      </div>
+      <div>
+      <h3 id="yes-correct">Yas! +10 points for you Glen Coco</h3>
+      <h3 id="no-wrong">Wrong! -10 seconds!</h3>
       </div>
       <h3 id="display-score"></h3>
       <div id="user-final-score"></div>
       <div class="highscore-table">
         <table id="table">
           <tr>
-            <th class="hidden1">Initials</th>
-            <th class="hidden2">High Score</th>
+            <th>Initials</th>
+            <th>High Score</th>
           </tr>
         </table>
       </div> <br><br>
@@ -56,7 +68,6 @@
       </form>
       <button id="clear">Clear Highscores</button>
       <button id="go-back">Go Back</button> <br>
-      <button class="start-quiz">Begin Quiz</button>
     </main>
     <script src="./Assets/script.js" defer></script>
   </body>

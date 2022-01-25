@@ -1,5 +1,6 @@
 // Assign query selector variables
 var startQuiz = document.querySelector(".start-quiz");
+var instructions = document.querySelector("#instructions")
 var quizQuestions = document.querySelector("#questions");
 var quizAnswers = document.querySelector("#possible-answers");
 var hiddenCorrect = document.querySelector("#hidden-correct");
@@ -51,7 +52,7 @@ var questions = [
 
   {
     question:
-      "If you type the following code in the console window, what result will you get? 3 > 2 > 1 === false;",
+      "If you type the following code in the console window, what result will you get? \n3 > 2 > 1 === false;",
     answers: {
       a: "True",
       b: "False",
@@ -122,6 +123,9 @@ function begin() {
   // Call function to begin timer
   setTime();
 
+  // Hide instructions
+  instructions.style.display = "none";
+
   // Hide start button upon clicking begin quiz
   startQuiz.style.display = "none";
   nextQuestion();
@@ -129,6 +133,7 @@ function begin() {
 
 // For loop to iterate through questions and answers
 function nextQuestion() {
+
   currentQuestion = questions[questionIndex];
   quizQuestions.textContent = currentQuestion.question;
 
@@ -150,13 +155,18 @@ function nextQuestion() {
 
 function selectAnswer(event) {
   userAnswer = event.target;
+    // Hides the correct or wrong p tag
+  document.getElementById("yes-correct").style.visibility = "hidden"
+  document.getElementById("no-wrong").style.visibility = "hidden"
 
   // If: answer matches correct answer, display "correct" and go to next question
   if (
     userAnswer.textContent ===
     currentQuestion.answers[currentQuestion.correctAnswer]
   ) {
-    alert("Correct! +10 points");
+    // Display yas correct
+    document.getElementById("yes-correct").style.visibility = "visible"
+    // Add 10 points to score
     userScore = userScore + 10;
   }
   
@@ -165,6 +175,9 @@ function selectAnswer(event) {
     userAnswer.textContent !=
     currentQuestion.answers[currentQuestion.correctAnswer]
   ) {
+    // Display wrong
+    document.getElementById("no-wrong").style.visibility = "visible"
+    // Deduct 10 seconds
     secondsLeft = secondsLeft - 10;
   }
 
@@ -188,6 +201,10 @@ function showResults() {
   // Hides questions and answers
   quizQuestions.style.display = "none";
   quizAnswers.style.display = "none";
+
+  document.getElementById("yes-correct").style.display = "none"
+  document.getElementById("no-wrong").style.display = "none"
+  
 
   // Calculates score
   userScore = userScore + secondsLeft;

@@ -1,9 +1,19 @@
 * {
     font-family: 'Montserrat', sans-serif;
+    color: #F88158;
 }
 
 h1 {
     text-align: center;
+    font-family: 'Lobster', cursive;
+    font-size: 75px;
+    color: #F08080;
+    margin-top: 50px;
+}
+
+#fun {
+    font-family: 'Lobster', cursive;
+    color: #F9966B;
 }
 
 .highscores {
@@ -20,12 +30,14 @@ main {
 
 #form {
     visibility: hidden;
+    font-size: large;
 }
 
 #table {
     visibility: hidden;
     margin-right: auto;
     margin-left: auto;
+    font-size: large;
 }
 
 table, th {
@@ -39,4 +51,35 @@ table, th {
 #go-back {
     visibility: hidden;
 }
+
+button {
+    background-color: #F08080;
+    padding: 2px;
+    margin: 4px;
+    font-size: large;
+    font-family: 'Courier New', Courier, monospace;
+    color: black;
+}
+
+#submit {
+    background-color: #F08080;
+    padding: 2px;
+    margin: 4px;
+    font-size: large;
+    font-family: 'Courier New', Courier, monospace;
+    color: black;
+}
+
+#yes-correct {
+    visibility: hidden;
+    font-family: 'Lobster', cursive;
+    font-size: 50px;
+}
+
+#no-wrong {
+    visibility: hidden;
+    font-family: 'Lobster', cursive;
+    font-size: 50px;
+}
+
 
