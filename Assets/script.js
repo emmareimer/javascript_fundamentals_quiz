@@ -156,8 +156,8 @@ var questions = [
   {
     question: "What is the correct way to write a JavaScript array?",
     answers: {
-      a: "var colors = (1:'red', 2:'green', 3:'blue'",
-      b: "var colors = ['red', 'green', 'blue'",
+      a: "var colors = (1:'red', 2:'green', 3:'blue')",
+      b: "var colors = ['red', 'green', 'blue']",
       c: "var colors = 1(red) 2(green) 3(blue)",
       d: "var colors = 'red', 'green', 'blue'",
     },
