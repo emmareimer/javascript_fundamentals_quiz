@@ -83,7 +83,7 @@ var questions = [
       b: "function=myFunction()",
       c: "function myFunction ()",
     },
-    correctAnswer: "c",
+    correctAnswer: "b",
   },
 
   {
