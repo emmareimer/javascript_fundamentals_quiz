@@ -82,12 +82,7 @@ button {
 #yes-correct {
     font-family: 'Lobster', cursive;
     font-size: 50px;
-}
-
-#no-wrong {
-    visibility: hidden;
-    font-family: 'Lobster', cursive;
-    font-size: 50px;
+    color: #F9966B;
 }
 
 /* @media (max-width: 480px) { 
