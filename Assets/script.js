@@ -1,6 +1,5 @@
 // Assign query selector variables
 var startQuiz = document.querySelector(".start-quiz");
-var instructions = document.querySelector("#instructions")
 var quizQuestions = document.querySelector("#questions");
 var quizAnswers = document.querySelector("#possible-answers");
 var hiddenCorrect = document.querySelector("#hidden-correct");
@@ -122,9 +121,6 @@ var questions = [
 function begin() {
   // Call function to begin timer
   setTime();
-
-  // Hide instructions
-  instructions.style.display = "none";
 
   // Hide start button upon clicking begin quiz
   startQuiz.style.display = "none";

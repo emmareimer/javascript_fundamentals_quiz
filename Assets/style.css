@@ -1,6 +1,6 @@
 * {
     font-family: 'Montserrat', sans-serif;
-    color: #F88158;
+    color: #E56717;
 }
 
 h1 {
@@ -54,20 +54,28 @@ table, th {
 
 button {
     background-color: #F08080;
-    padding: 2px;
-    margin: 4px;
+    padding-left: 6px;
+    padding-right: 6px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    margin: 5px;
     font-size: large;
     font-family: 'Courier New', Courier, monospace;
     color: black;
+    border-radius: 5px;
 }
 
 #submit {
     background-color: #F08080;
-    padding: 2px;
-    margin: 4px;
+    padding-left: 6px;
+    padding-right: 6px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    margin: 5px;
     font-size: large;
     font-family: 'Courier New', Courier, monospace;
     color: black;
+    border-radius: 5px;
 }
 
 #yes-correct {
